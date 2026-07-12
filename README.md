@@ -1,79 +1,71 @@
-# 🏠 Tennessee Real Estate Market Analysis | SQL + Power BI
+# Tennessee Real Estate Market Analysis
 
-## 📋 Project Summary
+An end-to-end data analytics project cleaning 56,000+ raw property records using SQL and delivering an interactive Power BI dashboard with actionable insights into market trends, city-level pricing, and property type performance across Tennessee (2013–2016).
 
-| | |
-|---|---|
-| **Business Context** | Tennessee's real estate market lacked a centralized, clean data source — leaving agents, investors, and county assessors unable to make data-driven decisions on pricing, sales trends, or market distribution |
-| **Objective** | Clean 56,000+ raw property records using SQL and build an interactive Power BI dashboard delivering actionable insights into market trends, city-level pricing, and property type performance across Tennessee (2013–2016) |
-| **Solution** | Executed a two-phase pipeline: SQL data cleaning (6 issue categories resolved, 103 duplicates removed) followed by a two-page interactive Power BI dashboard with DAX measures and cross-filtering slicers |
-| **Business Outcome** | Delivered a dashboard tracking $18.4B in total property sales across 56,000+ transactions — enabling stakeholders to identify high-value markets, monitor YoY growth, and assess pricing gaps across property categories |
+**Tools used:** Microsoft SQL Server (SQL) · Power BI
+
+## Data Source
+Tennessee property sales records (2013–2016) covering 56,374 transactions across cities, property types, and sale values.
 
 ---
 
-## 🔍 Business Problem
+## About This Project
+
+End-to-end solo project covering SQL data cleaning, data modelling, DAX measure development, and dashboard design in Power BI. The project was executed in two phases — a structured SQL cleaning pipeline resolving six categories of data quality issues, followed by a two-page interactive dashboard enabling stakeholders to explore market trends, pricing gaps, and city-level performance.
+
+---
+
+## Business Problem
 
 Tennessee's real estate market data existed in raw, inconsistent form — with missing property addresses, combined address fields, inconsistent date formats, duplicate records, and unstandardized values. Stakeholders including real estate agents, investors, and county assessors could not make informed decisions without reliable, structured data to analyze sales trends, pricing patterns, and market distribution across cities and property types.
 
-**The goal:** Transform 56,374 raw property records into a clean, analysis-ready dataset and deliver an interactive Power BI dashboard enabling data-driven insights across Tennessee's real estate market from 2013 to 2016.
+The goal was to transform 56,374 raw property records into a clean, analysis-ready dataset and deliver an interactive Power BI dashboard enabling data-driven insights across Tennessee's real estate market from 2013 to 2016.
 
 ---
 
-## 💡 Solution
+## Approach
 
-This project was executed in two phases:
+The analysis was structured across two phases:
 
-### Phase 1 — Data Cleaning (SQL)
-
-A structured SQL pipeline was built in Microsoft SQL Server to resolve 6 categories of data quality issues:
-
-| Issue | Resolution |
-|---|---|
-| Inconsistent date formats | Converted `SaleDate` to standard DATE format using `CONVERT` |
-| Missing property addresses | Imputed NULLs using a self-join on `ParcelID` — same ParcelID always shares the same address |
-| Combined address fields | Split into Street and City columns using `PARSENAME` for granular city-level analysis |
-| Inconsistent Yes/No values | Standardized `SoldAsVacant` field from binary (0/1) to readable (Y/N) using `CASE` statements |
-| 103 duplicate records | Identified and safely removed using `RANK()` window function across multiple columns |
-| Redundant columns | Dropped non-essential fields using `ALTER` and `DROP` to streamline the dataset |
-
-**SQL Concepts Applied:** SELECT · Self-JOIN · String Manipulation (PARSENAME) · Window Functions (RANK) · CTEs · UPDATE · DROP · ALTER · Data Type Conversion
-
-### Phase 2 — Reporting (Power BI)
-
-An interactive two-page dashboard was built on the cleaned dataset:
-
-- **Data Model:** Connected cleaned dataset to Power BI with a calendar table for time-based trend analysis
-- **DAX Measures:** Median Sale Price, Total Transactions, Average Assessment Gap %, YoY Sales Growth
-- **Page 1 — Market Overview:** KPI cards for total transactions and median price, sales price trend by year, median price by city, and sales volume by property category
-- **Page 2 — Sales Analysis:** YoY sales trend by city, vacant vs. improved property split, top cities by transaction value, and average price by property category
-- **Interactivity:** Cross-filtering slicers for Year and City enable dynamic exploration across both dashboard pages
+- **Phase 1 — Data Cleaning (SQL)** — a structured pipeline in Microsoft SQL Server resolved six categories of data quality issues: inconsistent date formats converted using `CONVERT`; missing property addresses imputed via self-join on `ParcelID`; combined address fields split into Street and City using `PARSENAME`; `SoldAsVacant` field standardized from binary (0/1) to readable (Y/N) using `CASE` statements; 103 duplicate records identified and removed using `RANK()` window function; and redundant columns dropped using `ALTER` and `DROP`
+- **Phase 2 — Reporting (Power BI)** — an interactive two-page dashboard was built on the cleaned dataset with a calendar table for time-based trend analysis and DAX measures covering Median Sale Price, Total Transactions, Average Assessment Gap %, and YoY Sales Growth. Year and City slicers enable dynamic cross-filtering across both pages
 
 ---
 
-## 📊 Business Outcome
+## Dashboard Preview
 
-The cleaned dataset and Power BI dashboard enabled the following insights across **56,374 property transactions** and **$18.4B in total sales value**:
+**Page 1 — Market Overview**
 
-- 🏙️ **Nashville dominated with 40,216 transactions (71% of total market)** — followed by Antioch (6,286) and Hermitage (3,126), revealing clear market concentration for investment targeting
-- 💰 **Median sale price of $205,700** established as the market benchmark — enabling price comparison across cities and property types
-- 📈 **Sales volume grew 48% from 2013 to 2015** (11,292 → 16,734 transactions) — peak market activity identified for trend and forecasting analysis
-- 🏡 **Single Family homes account for 60.5% of all transactions** (34,120 records) — the dominant property category driving market activity
-- 📉 **Assessment gap monitoring** enabled stakeholders to identify properties where assessed value diverged from sale price — supporting pricing and investment decisions
-- 🔎 **103 duplicate records removed** and all missing address data resolved — delivering a fully clean, analysis-ready dataset
+> KPI cards for total transactions and median price · Sales price trend by year · Median price by city · Sales volume by property category
+
+**Page 2 — Sales Analysis**
+
+> YoY sales trend by city · Vacant vs improved property split · Top cities by transaction value · Average price by property category
 
 ---
 
-## 📁 Repository Contents
+## Key Findings
+
+- **Nashville dominated with 40,216 transactions (71% of total market)** — followed by Antioch (6,286) and Hermitage (3,126), revealing clear market concentration for investment targeting
+- **Median sale price of $205,700** established as the market benchmark — enabling price comparison across cities and property types
+- **Sales volume grew 48% from 2013 to 2015** (11,292 to 16,734 transactions) — peak market activity identified for trend and forecasting analysis
+- **Single Family homes account for 60.5% of all transactions** (34,120 records) — the dominant property category driving market activity
+- **Assessment gap monitoring** enabled stakeholders to identify properties where assessed value diverged from sale price — supporting pricing and investment decisions
+- **103 duplicate records removed** and all missing address data resolved — delivering a fully clean, analysis-ready dataset
+
+---
+
+## Repository Contents
 
 | File | Description |
 |---|---|
-| `TN_Real_Estate_EDA.sql` | Full SQL script with all 6 data cleaning steps |
-| `TN_Real_Estate_Market_and_Sales_Report.pptx` | Full project presentation with SQL walkthrough and Power BI dashboard |
-| `Real_Estate_EDA.csv` | Cleaned dataset output (56,374 records) |
-| `TN_Real_Estate.pbix` | Interactive Power BI dashboard file |
+| `TN_Real_Estate_EDA.sql` | Full SQL script covering all 6 data cleaning steps |
+| `Final Output - TN_Real_Estate_Data_cleaned.xlsx` | Cleaned dataset output (56,374 records) |
+| `TN Real Estate.pbix` | Interactive Power BI dashboard file |
+| `Project Summary - TN Real Estate Market and Sales.pptx` | Project presentation with SQL walkthrough and Power BI dashboard |
 
 ---
 
-## 🔗 Connect
+## Connect
 
 [LinkedIn](http://www.linkedin.com/in/shobhitasohal)
